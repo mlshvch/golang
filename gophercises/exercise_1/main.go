@@ -22,6 +22,22 @@ func main() {
 	fmt.Println(lines)
 }
 
+func parseLines(lines [][]string) []problem {
+	ret := make([]problem, len(lines))
+	for i, line := range lines {
+		ret[i] = problem{
+			question: line[0],
+			answer:   line[1],
+		}
+	}
+	return ret
+}
+
+type problem struct {
+	question string
+	answer   string
+}
+
 func exit(msg string) {
 	fmt.Println(msg)
 	os.Exit(1)
