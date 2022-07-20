@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/csv"
 	"flag"
 	"fmt"
 	"os"
@@ -13,7 +14,12 @@ func main() {
 	if err != nil {
 		exit(fmt.Sprintf("Failed to open CSV file: %s\n", *csvFilename))
 	}
-	_ = file
+	r := csv.NewReader(file)
+	lines, err := r.ReadAll()
+	if err != nil {
+		exit("Failed to parse provided CSV file :(")
+	}
+	fmt.Println(lines)
 }
 
 func exit(msg string) {
